@@ -1,7 +1,7 @@
 package callreturn;
 
-import static java.util.Arrays.asList;
-
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,8 +9,12 @@ public class Pila {
 	
 	private List<Integer> elementos  = new LinkedList<>();
 
-	public Pila(Integer... elementosAgregar) {
-		this.elementos = asList(elementosAgregar);
+	private Pila(List<Integer> elementosAgregar) {
+		this.elementos.addAll(elementosAgregar);
+	}
+	
+	private Pila() {
+		super();
 	}
 
 	public static Pila empty() {
@@ -22,7 +26,32 @@ public class Pila {
 	}
 
 	public Pila poner(int elemento) {
-		return new Pila(elementos.stream().);
+		return new Pila(new LinkedList<Integer>() {{
+			addAll(elementos);
+			add(elemento);
+		}});
 	}
+
+	@Override
+	public String toString() {
+		return "Pila" + Arrays.toString(elementos.toArray()) + "";
+	}
+
+	public Pila sacar() {
+		return new Pila(new LinkedList<Integer>(){{
+			addAll(elementos);
+			remove(tope());
+		}});
+	}
+
+	public Integer tope() {
+		if (size() > 0) {
+			return elementos.get(elementos.size() - 1);
+		} else {
+			return null;
+		}
+	}
+	
+	
 
 }
